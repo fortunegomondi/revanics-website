@@ -395,7 +395,8 @@
                 Join the priority waitlist to receive technical updates, platform documentation, and early sandbox access.
             </p>
 
-            <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <!-- Expanded container max-w-2xl for wider, comfortable inputs -->
+            <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto">
                 <input 
                     type="text" 
                     id="waitlist-name" 
@@ -528,16 +529,16 @@
             submitBtn.innerText = 'Submitting...';
 
             try {
-                // Step A: Save email and name to Supabase Database
+                // Step A: Save email to Supabase Database safely (avoids column missing errors)
                 const { error: dbError } = await _supabase
                     .from('waitlist')
-                    .insert([{ email: userEmail, name: userName }]);
+                    .insert([{ email: userEmail }]);
 
                 if (dbError && dbError.code !== '23505') { 
                     throw dbError;
                 }
 
-                // Step B: Trigger automated confirmation email via EmailJS with BOTH variables
+                // Step B: Trigger automated confirmation email via EmailJS with BOTH name and email
                 if (EMAILJS_PUBLIC_KEY) {
                     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
                         user_name: userName,
