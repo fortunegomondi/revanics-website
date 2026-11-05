@@ -547,6 +547,41 @@
                 submitBtn.innerText = 'Join Waitlist';
             }
         }
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  // 1. Check Honeypot: If filled, silently block submission
+  const honeypot = document.getElementById('website_url').value;
+  if (honeypot) {
+    console.log('Bot detected.');
+    return; 
+  }
+
+  const btn = document.getElementById('submit-btn');
+  const btnText = document.getElementById('btn-text');
+  const spinner = document.getElementById('spinner');
+
+  // 2. Enable Loading State
+  btn.disabled = true;
+  btnText.textContent = 'Sending...';
+  spinner.classList.remove('hidden');
+
+  // 3. Send via EmailJS (Replace with your actual Service ID and Template ID)
+  emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+    .then(() => {
+      alert('Message sent successfully!');
+      this.reset();
+    }, (error) => {
+      alert('Failed to send message. Please try again.');
+      console.error('EmailJS Error:', error);
+    })
+    .finally(() => {
+      // 4. Reset Button State
+      btn.disabled = false;
+      btnText.textContent = 'Send Message';
+      spinner.classList.add('hidden');
+    });
+});
     </script>
 </body>
 </html>
