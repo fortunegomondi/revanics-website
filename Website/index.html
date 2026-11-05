@@ -397,8 +397,17 @@
 
             <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                 <input 
+                    type="text" 
+                    id="waitlist-name" 
+                    name="user_name" 
+                    required 
+                    placeholder="Enter your name..." 
+                    class="w-full bg-cardBg border border-borderSubtle focus:border-cyan-400 rounded-full px-6 py-4 text-sm text-white focus:outline-none transition-colors"
+                >
+                <input 
                     type="email" 
                     id="waitlist-email" 
+                    name="user_email" 
                     required 
                     placeholder="Enter your enterprise email..." 
                     class="w-full bg-cardBg border border-borderSubtle focus:border-cyan-400 rounded-full px-6 py-4 text-sm text-white focus:outline-none transition-colors"
@@ -450,7 +459,7 @@
         // EmailJS credentials
         const EMAILJS_PUBLIC_KEY = 'PI52t9rEsRXMfTayl';
         const EMAILJS_SERVICE_ID = 'service_nluw7vp';
-        const EMAILJS_TEMPLATE_ID = 'template_kjb04ys'; // Updated template ID
+        const EMAILJS_TEMPLATE_ID = 'template_kjb04ys';
 
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -505,35 +514,40 @@
         // --- 4. FORM SUBMISSION & AUTOMATED EMAIL ---
         async function handleWaitlistSubmit(e) {
             e.preventDefault();
+            const nameInput = document.getElementById('waitlist-name');
             const emailInput = document.getElementById('waitlist-email');
             const submitBtn = document.getElementById('submit-btn');
             const toast = document.getElementById('waitlist-toast');
+            
+            const userName = nameInput.value.trim();
             const userEmail = emailInput.value.trim();
 
-            if (!userEmail) return;
+            if (!userEmail || !userName) return;
 
             submitBtn.disabled = true;
             submitBtn.innerText = 'Submitting...';
 
             try {
-                // Step A: Save email to Supabase Database
+                // Step A: Save email and name to Supabase Database
                 const { error: dbError } = await _supabase
                     .from('waitlist')
-                    .insert([{ email: userEmail }]);
+                    .insert([{ email: userEmail, name: userName }]);
 
                 if (dbError && dbError.code !== '23505') { 
                     throw dbError;
                 }
 
-                // Step B: Trigger automated confirmation email via EmailJS
+                // Step B: Trigger automated confirmation email via EmailJS with BOTH variables
                 if (EMAILJS_PUBLIC_KEY) {
                     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                        user_name: userName,
                         user_email: userEmail
                     });
                 }
 
                 // Step C: Success UI feedback
                 toast.classList.remove('hidden');
+                nameInput.value = '';
                 emailInput.value = '';
                 setTimeout(() => {
                     toast.classList.add('hidden');
@@ -547,41 +561,6 @@
                 submitBtn.innerText = 'Join Waitlist';
             }
         }
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  // 1. Check Honeypot: If filled, silently block submission
-  const honeypot = document.getElementById('website_url').value;
-  if (honeypot) {
-    console.log('Bot detected.');
-    return; 
-  }
-
-  const btn = document.getElementById('submit-btn');
-  const btnText = document.getElementById('btn-text');
-  const spinner = document.getElementById('spinner');
-
-  // 2. Enable Loading State
-  btn.disabled = true;
-  btnText.textContent = 'Sending...';
-  spinner.classList.remove('hidden');
-
-  // 3. Send via EmailJS (Replace with your actual Service ID and Template ID)
-  emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-    .then(() => {
-      alert('Message sent successfully!');
-      this.reset();
-    }, (error) => {
-      alert('Failed to send message. Please try again.');
-      console.error('EmailJS Error:', error);
-    })
-    .finally(() => {
-      // 4. Reset Button State
-      btn.disabled = false;
-      btnText.textContent = 'Send Message';
-      spinner.classList.add('hidden');
-    });
-});
     </script>
 </body>
 </html>
