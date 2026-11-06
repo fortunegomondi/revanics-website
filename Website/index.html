@@ -98,6 +98,7 @@
                 <a href="#solutions" class="hover:text-cyan-400 transition-colors">Solutions</a>
                 <a href="#stack" class="hover:text-cyan-400 transition-colors">Architecture</a>
                 <a href="#roadmap" class="hover:text-cyan-400 transition-colors">Roadmap</a>
+                <a href="#faq" class="hover:text-cyan-400 transition-colors">FAQ</a>
                 <a href="#waitlist" class="hover:text-cyan-400 transition-colors">Early Access</a>
                 <a href="#press" class="hover:text-cyan-400 transition-colors">Contact</a>
             </div>
@@ -117,6 +118,7 @@
             <a href="#solutions" class="block text-gray-300 hover:text-cyan-400 font-medium mobile-link">Solutions</a>
             <a href="#stack" class="block text-gray-300 hover:text-cyan-400 font-medium mobile-link">Architecture</a>
             <a href="#roadmap" class="block text-gray-300 hover:text-cyan-400 font-medium mobile-link">Roadmap</a>
+            <a href="#faq" class="block text-gray-300 hover:text-cyan-400 font-medium mobile-link">FAQ</a>
             <a href="#waitlist" class="block text-gray-300 hover:text-cyan-400 font-medium mobile-link">Early Access</a>
             <a href="#press" class="block text-gray-300 hover:text-cyan-400 font-medium mobile-link">Contact</a>
         </div>
@@ -386,6 +388,68 @@
         </div>
     </section>
 
+    <!-- Frequently Asked Questions (FAQ) -->
+    <section id="faq" class="py-28 px-6 border-t border-borderSubtle bg-darkBg relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-cyan-400 text-xs font-mono font-semibold tracking-widest uppercase block mb-3">// KNOWLEDGE BASE</span>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">Frequently Asked Questions</h2>
+                <p class="text-gray-400 font-light text-sm">Everything you need to know about our enterprise platforms, architecture, and security.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-cardBg border border-borderSubtle rounded-xl p-6 transition-colors">
+                    <h3 class="text-white font-semibold text-base mb-2">What security standards do Revanics platforms adhere to?</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed">Our infrastructure utilizes AES-256-GCM encryption, hardware security modules (HSMs) for key storage, and strict multi-tenant isolation per schema to guarantee zero-trust enterprise compliance.</p>
+                </div>
+                <div class="bg-cardBg border border-borderSubtle rounded-xl p-6 transition-colors">
+                    <h3 class="text-white font-semibold text-base mb-2">When does official commercial deployment go live?</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed">Our official target commercial deployment date is set for **June 20, 2027**. Early access waitlist members receive sandbox credentials during our rolling alpha and beta phases.</p>
+                </div>
+                <div class="bg-cardBg border border-borderSubtle rounded-xl p-6 transition-colors">
+                    <h3 class="text-white font-semibold text-base mb-2">How can enterprises request a private pilot?</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed">Enterprise teams can register using our priority waitlist below or reach out directly to our engineering partnership desk at <a href="mailto:masterinvention2020@gmail.com" class="text-cyan-400 hover:underline">masterinvention2020@gmail.com</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer SDK & API Previewer -->
+    <section class="py-24 px-6 border-t border-borderSubtle bg-neutral-950/40 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-cyan-400 text-xs font-mono font-semibold tracking-widest uppercase block mb-3">// DEVELOPER EXPERIENCE</span>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">Built for System Integrators</h2>
+                <p class="text-gray-400 font-light text-sm">Integrate high-speed gRPC abstractions and tokenization gateways with minimal configuration.</p>
+            </div>
+
+            <div class="bg-cardBg border border-borderSubtle rounded-2xl overflow-hidden shadow-2xl">
+                <div class="flex items-center justify-between px-6 py-4 bg-darkBg/80 border-b border-borderSubtle">
+                    <div class="flex items-center gap-2 text-xs text-gray-400 font-mono">
+                        <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+                        <span class="ml-2">gateway-client.cs</span>
+                    </div>
+                    <span class="text-[10px] font-mono text-cyan-400 uppercase tracking-widest bg-cyan-500/10 px-2.5 py-1 rounded border border-cyan-500/20">.NET / C# SDK</span>
+                </div>
+                <div class="p-6 font-mono text-xs sm:text-sm text-gray-300 overflow-x-auto leading-relaxed">
+                    <pre><span class="text-purple-400">using</span> Revanics.Security.KryptoShield;
+
+<span class="text-blue-400">var</span> client = <span class="text-purple-400">new</span> <span class="text-yellow-400">KryptoShieldClient</span>(<span class="text-emerald-400">"rev_live_9983109a"</span>);
+
+<span class="text-blue-400">var</span> response = <span class="text-purple-400">await</span> client.<span class="text-yellow-400">InspectPayloadAsync</span>(<span class="text-purple-400">new</span> PayloadRequest {
+    TenantId = <span class="text-emerald-400">"banking-core-01"</span>,
+    MaskPII = <span class="text-cyan-400">true</span>,
+    EncryptionStandard = <span class="text-emerald-400">"AES-256-GCM"</span>
+});
+
+Console.<span class="text-yellow-400">WriteLine</span>($<span class="text-emerald-400">"Tokenized Gateway Status: {response.Status}"</span>);</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Waitlist Signup -->
     <section id="waitlist" class="py-28 px-6 border-t border-borderSubtle bg-darkBg relative z-10">
         <div class="max-w-3xl mx-auto text-center">
@@ -395,7 +459,6 @@
                 Join the priority waitlist to receive technical updates, platform documentation, and early sandbox access.
             </p>
 
-            <!-- Vertical Stack Layout with max-w-md -->
             <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="flex flex-col gap-4 max-w-md mx-auto">
                 <input 
                     type="text" 
