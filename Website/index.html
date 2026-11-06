@@ -395,15 +395,15 @@
                 Join the priority waitlist to receive technical updates, platform documentation, and early sandbox access.
             </p>
 
-            <!-- Expanded container max-w-2xl for wider, comfortable inputs -->
-            <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto">
+            <!-- Stacked layout with max-w-lg for comfortable full-width typing on laptops and desktops -->
+            <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="flex flex-col gap-4 max-w-lg mx-auto">
                 <input 
                     type="text" 
                     id="waitlist-name" 
                     name="user_name" 
                     required 
-                    placeholder="Enter your name..." 
-                    class="w-full bg-cardBg border border-borderSubtle focus:border-cyan-400 rounded-full px-6 py-4 text-sm text-white focus:outline-none transition-colors"
+                    placeholder="Enter your full name..." 
+                    class="w-full bg-cardBg border border-borderSubtle focus:border-cyan-400 rounded-xl px-6 py-4 text-sm text-white focus:outline-none transition-colors"
                 >
                 <input 
                     type="email" 
@@ -411,9 +411,9 @@
                     name="user_email" 
                     required 
                     placeholder="Enter your enterprise email..." 
-                    class="w-full bg-cardBg border border-borderSubtle focus:border-cyan-400 rounded-full px-6 py-4 text-sm text-white focus:outline-none transition-colors"
+                    class="w-full bg-cardBg border border-borderSubtle focus:border-cyan-400 rounded-xl px-6 py-4 text-sm text-white focus:outline-none transition-colors"
                 >
-                <button type="submit" id="submit-btn" class="w-full sm:w-auto px-8 py-4 bg-white text-black font-semibold text-sm rounded-full hover:bg-cyan-400 transition-all duration-300 shrink-0">
+                <button type="submit" id="submit-btn" class="w-full py-4 bg-white text-black font-semibold text-sm rounded-xl hover:bg-cyan-400 transition-all duration-300">
                     Join Waitlist
                 </button>
             </form>
@@ -529,10 +529,10 @@
             submitBtn.innerText = 'Submitting...';
 
             try {
-                // Step A: Save email to Supabase Database safely (avoids column missing errors)
+                // Step A: Save both email and name to Supabase Database (since you created the column)
                 const { error: dbError } = await _supabase
                     .from('waitlist')
-                    .insert([{ email: userEmail }]);
+                    .insert([{ email: userEmail, name: userName }]);
 
                 if (dbError && dbError.code !== '23505') { 
                     throw dbError;
