@@ -395,15 +395,15 @@
                 Join the priority waitlist to receive technical updates, platform documentation, and early sandbox access.
             </p>
 
-            <!-- Stacked layout with max-w-lg for comfortable full-width typing on laptops and desktops -->
-            <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="flex flex-col gap-4 max-w-lg mx-auto">
+            <!-- Vertical Stack Layout with max-w-md -->
+            <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="flex flex-col gap-4 max-w-md mx-auto">
                 <input 
                     type="text" 
                     id="waitlist-name" 
                     name="user_name" 
                     required 
                     placeholder="Enter your full name..." 
-                    class="w-full bg-cardBg border border-borderSubtle focus:border-cyan-400 rounded-xl px-6 py-4 text-sm text-white focus:outline-none transition-colors"
+                    class="w-full bg-cardBg border border-borderSubtle focus:border-cyan-400 rounded-full px-6 py-4 text-sm text-white focus:outline-none transition-colors"
                 >
                 <input 
                     type="email" 
@@ -411,9 +411,9 @@
                     name="user_email" 
                     required 
                     placeholder="Enter your enterprise email..." 
-                    class="w-full bg-cardBg border border-borderSubtle focus:border-cyan-400 rounded-xl px-6 py-4 text-sm text-white focus:outline-none transition-colors"
+                    class="w-full bg-cardBg border border-borderSubtle focus:border-cyan-400 rounded-full px-6 py-4 text-sm text-white focus:outline-none transition-colors"
                 >
-                <button type="submit" id="submit-btn" class="w-full py-4 bg-white text-black font-semibold text-sm rounded-xl hover:bg-cyan-400 transition-all duration-300">
+                <button type="submit" id="submit-btn" class="w-full py-4 bg-white text-black font-semibold text-sm rounded-full hover:bg-cyan-400 transition-all duration-300">
                     Join Waitlist
                 </button>
             </form>
@@ -432,8 +432,8 @@
                 <h3 class="text-2xl font-bold text-white mb-2">Inquiries & Partnerships</h3>
                 <p class="text-gray-400 text-sm font-light">For pilot inquiries, enterprise integrations, or technical documentation access.</p>
             </div>
-            <a href="mailto:contact@revanics.com" class="px-6 py-3 bg-cardBg border border-borderSubtle hover:border-gray-500 text-gray-300 hover:text-white rounded-full text-sm font-medium transition-colors">
-                contact@revanics.com
+            <a href="mailto:masterinvention2020@gmail.com" class="px-6 py-3 bg-cardBg border border-borderSubtle hover:border-gray-500 text-gray-300 hover:text-white rounded-full text-sm font-medium transition-colors">
+                masterinvention2020@gmail.com
             </a>
         </div>
     </section>
@@ -529,7 +529,7 @@
             submitBtn.innerText = 'Submitting...';
 
             try {
-                // Step A: Save both email and name to Supabase Database (since you created the column)
+                // Step A: Save both name and email to Supabase Database
                 const { error: dbError } = await _supabase
                     .from('waitlist')
                     .insert([{ email: userEmail, name: userName }]);
